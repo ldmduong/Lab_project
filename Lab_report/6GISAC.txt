@@ -1,0 +1,325 @@
+Nội dung chính:  cảm biến tích hợp truyền thông hợp tác cho 6G
+
+
+1. Khái niệm cốt lõi ("NICE") & Mô hình hệ thống
+--------------------------------------------------------------------
+
+
+N – Network-enabled: Tận dụng hạ tầng mạng di động mật độ cao (C-RAN, Cell-free) và năng lực tính toán để mở rộng phạm vi cảm biến với độ trễ thấp.
+
+I – Integration: Tích hợp chia sẻ tài nguyên phần cứng (mảng anten) và tài nguyên vô tuyến (thời gian, tần số, không gian, công suất), cùng với hợp nhất dữ liệu ở 3 cấp độ.
+
+C – Cooperation: Hợp tác đa nút (multi-node), đa băng tần (low, mid, high-frequency) và phối hợp tương hỗ giữa truyền thông và cảm biến.
+
+E – Everything: Đa dạng hóa các thiết bị tham gia thu phát cảm biến (BS-BS, BS-UE, UE-UE) và kết hợp cảm biến đa phương thức (hình ảnh, radar, nhiệt, cảm biến môi trường).
+
+
+2. Các công nghệ then chốt
+--------------------------------------------------------------------
+Thiết kế Anten + búp sóng: phân bổ sóng chi tiết cho vùng
+Tạo cụm và lựa chọn nút: lựa chọn nút dựa trên SiNR - P => bao phủ S lớn nhất + giảm nhiễu can thiệp + dư thừa + tối đa hóa hiệu suất
+Đồng bộ hóa: giảm thiểu sai số thời gian = pp đo khứ hồi Round Trip + tần số = pp đo đường trực tiếp ( tham chiếu )
+Data fusion: kết hợp + tíhc hợp + diễn giải dữ liệu từ nhiều cảm biến khác nhau => thông tin hữu ích
+Quản lý nhiễu can thiệp + quy hoạch mạng: mô hình mạng dạng vòng đồng tâm => xen kẽ lướp phát + thui => triệt tiêu nhiễu can thiệp
+
+3. Các chỉ số hiệu suất chính:
+--------------------------------------------------------------------
+Đề suất dùng network sensing capacity => đáp ứng yêu cầu QoS về độ trễ + đọ chính xác dưới tài nguyên giới hạn
+
+
+4. Đánh giá hiệu năng
+--------------------------------------------------------------------
+Đánh giá performance của UAV detection
+(1) Perform a system-level simulation and initialize the evaluation parameters with a chosen false alarm probability.
+(2) Generate a sensing transmit signal and obtain the received
+signal. Perform sensing signal processing and record whether a
+sensing object is detected or not.
+(3) Repeat steps 1 and 2 for a total number of G targets and
+record the number of successfully detected targets, denoted as
+Sdect.
+(4) Calculate the detection probability (Pdect) as Pdect =Sdect /G.
+
+
+
+5. Kết quả thức nghiệm thực tế
+--------------------------------------------------------------------
+Thử nghiệm mmWave (26 GHz): Hiệu chuẩn qua giao diện vô tuyến đạt độ chính xác đo khoảng cách dưới 0.2 m (0.1941 m) kết hợp truyền dữ liệu 16-QAM đạt 683.78 Mbps.
+
+Thử nghiệm Bistatic & Multistatic (4.9 GHz): Định vị UAV với phạm vi phủ sóng 700–900 m; độ chính xác mặt phẳng ngang đạt ~6.41 m (bistatic) và dưới 15 m (multistatic), xác suất báo động giả và bỏ sót mục tiêu đều dưới 5%.
+
+Thử nghiệm mạng diện rộng (13 trạm 4.9 GHz): Đạt độ chính xác định vị UAV trong môi trường đô thị phức tạp là 14 m (ở độ cao 100–300 m), đáp ứng đầy đủ yêu cầu quản lý không phận tầm thấp.
+
+
+
+
+Isac có 2 hướng tối ưu: viễn thông => csht như anten, sóng // netwwork => chia sẻ dữ liệu, quản lý tài nguyên ...
+
+Isac liên quan đến netwwork:
+Kiến trúc mạng và tiêu chuẩn hóa (Ran protocol
+Quản lý tài nguyên vô tuyến và scheduling
+Điều phối đa trạm và triệt nhiễu can thiệp
+Mạng thông minh + tích hợp AI/Edge Computing
+
+
+=> multistatic : dùng 100% cơ sở hạ tầng thu được => ko hạn chế góc chết
+
+Nhóm hạ tầng và nút hô trợ di động
+trạm phát: truyền dữ liệu + chiếu xạ môi trường để cảm biến => trạm gốc gnodeB hay trạm mặt đất RSU
+trạm thu: nhận tín hiệu phản xạ => xử lý =< khử điểm mù + nâng cao góc + độ phần giải
+Uav:
+Làm trạm ISAC trên ko: phát/thu sóng xuống khu vực che khuất
+Làm nút thu: thu sóng px => truyền về trung tâm xử lý
+
+Bề mặt thông minh: gắn trên tòa nhà => tái định hướng búp sóng + thêm dg phản xạ khi gặp (NLOS => LOS)
+
+2. Ô tô và phương tiện và đối tượng
+Nút ISAC di động phát/thu sóng giao tiếp với xe khác + csht, tự quét dò đường + chia sẻ dữ liệu cho nút khác bị khuất
+Người dùng UE: tải bản đồ , cảnh báo an toàn qua downlink và gửi dữ liệu hành trình lên uplink
+Sensing target: đổi tượng phản xạ sóng => theo dõi
+Non cooperative: người đi bộ, uav lạ, oto
+cooperative: thiết bị gắn định vị, tag phản hồi => tăng độ chính xác
+
+3. xử lý trung tâm:
+Đặt tại trạm gốc hoặc cloud server => phân bổ búp sóng + tổng hợp dữ liệu cảm biến
+
+
+Tính chất nework enabled
+Tính phổ quát và mở rộng: BS vừa phát sóng cảm biến + xử lý dữ liệu
+Độ trễ thấp = >định vị real time
+Detection: phát hiện uav, xe lạ
+Collision: các xe có isac bổ trợ cho nhau + xe khác => giảm điểm mù
+Tính toán: dữ liệu thu được => gửi lên cloud server => tính toán => tạo bản đồ real time => đưa ra chỉ thị + lọc nhiễu
+
+HỆ THỐNG NETWORK-LEVEL ISAC THEO HƯỚNG MẠNG VÀ QoS
+(Dựa trên: Han, Meng, Wang, Masouros - "Network-Level ISAC Design: State-of-the-Art, Challenges, and Opportunities", 2025)
+
+===================================================
+
+KIẾN TRÚC MẠNG VÀ CÁC MỨC HỢP TÁC (COOPERATION LEVELS)
+===================================================
+Mạng gồm N node ISAC (BS) phân tán, mỗi node có Mt anten phát, Mr anten thu, hoạt động HD (tách biệt TX/RX) hoặc FD (đồng vị trí). Mức độ hợp tác quyết định overhead vs. gain:
+Non-cooperative: không chia sẻ CSI, không gain.
+Interference management: chia sẻ CSI người dùng/mục tiêu qua liên kết cặp BS, dùng để null nhiễu.
+Decentralized cooperation (coherent/non-coherent): cụm BS lân cận chia sẻ echo/CSI thô.
+Centralized cooperation: một fusion center tổng hợp toàn bộ CSI và dữ liệu - hiệu năng tối ưu nhưng overhead cực lớn.
+===================================================
+2. MÔ HÌNH TÍN HIỆU PHÁT TẠI NODE n
+
+Xn = sqrt(rho_c) * Wc_n * Sc_n + sqrt(rho_s) * Ws_n * Ss_n
+
+Hai chiến lược báo hiệu chính:
+
+CBF (Coordinated Beamforming): mỗi BS phục vụ tập user riêng, tín hiệu không tương quan giữa các node -> SINR bị giới hạn bởi INI (inter-node interference).
+Joint transmission CoMP (coherent/non-coherent): nhiều BS phát cùng dữ liệu tới một user -> nhiễu INI biến thành thành phần cộng hưởng tăng công suất tín hiệu.
+===================================================
+3. CHỈ TIÊU QoS PHÍA TRUYỀN THÔNG
+
+Với user k, ràng buộc QoS thường được biểu diễn bằng SINR threshold:
+
+Pc = Pr[SINR_com > gamma_c]
+
+SINR cụ thể theo từng chiến lược (CBF, non-coherent JT, coherent JT - công thức (23)-(25) trong bài) đều phải thỏa gamma_k >= Gamma_c để đảm bảo QoS communication.
+
+===================================================
+4. CHỈ TIÊU QoS PHÍA SENSING
+
+Thay vì SINR, sensing dùng CRLB (Cramer-Rao Lower Bound) làm chỉ tiêu chất lượng - càng nhỏ càng tốt. Ba phương pháp AOA/TOF/Hybrid có scaling law khác nhau theo mật độ BS N (bảng III trong bài).
+
+===================================================
+5. BÀI TOÁN TỐI ƯU NETWORK-LEVEL RÀNG BUỘC QoS
+
+Bài báo trình bày dạng tổng quát (công thức 29):
+
+min (theo {Xn}) tr( [F(Theta)]^-1 )
+s.t. gamma_k >= Gamma_c, với mọi k
+[Rn]_(m,m) <= PT
+
+Nghĩa là: tối thiểu hóa sai số định vị (CRLB) trong khi vẫn đảm bảo ngưỡng QoS truyền thông (SINR) và giới hạn công suất/backhaul - đây chính là "network-level ISAC nhìn theo QoS": sensing được tối ưu như mục tiêu chính, communication được đưa vào như ràng buộc dịch vụ.
+
+=================================================
+
+6. CÁC ĐIỂM MẤU CHỐT / TRADE-OFF
+Đồng bộ hóa là điều kiện tiên quyết: nếu chỉ đạt ~250 ps (spectral CC), hệ thống phân tán có thể THUA một node đơn tương đương do mất coherent combining gain. Cần kỹ thuật super-resolution (SOE-MP, ~10 ps) để khai thác hết lợi ích hợp tác.
+Trade-off backhaul: cụm hợp tác lớn hơn -> CRLB tốt hơn nhưng tải backhaul tăng theo Rc + e*N <= C_backhaul.
+Trade-off S-C ASE: vùng hiệu năng (Fig. 4a trong bài) là miền lồi; đặt ngưỡng tối thiểu cụm (L>=Lth, Q>=Qth) để đảm bảo chất lượng sẽ thu hẹp miền khả thi và giảm lợi ích hợp tác so với baseline chia sẻ thời gian (time-sharing).
+
+===================================================
+
+SYSTEM MODEL
+                   +------------------------------+
+                   |      Phương thức hợp tác     |
+                   | CBF, CoMP, hoặc centralized  |
+                   +--------------+---------------+
+                                  |
+                                  v
++---------------+  +------------------------------+
+|  Đồng bộ hóa  |->|   Tín hiệu phát tại N node   |
+|Time/freq/phase|  |   Comm + sensing precoding Xn|
++---------------+  +--------------+---------------+
+                                  |
+            +---------------------+---------------------+
+            |                                           |
+            v                                           v
++-------------------------+                 +-----------------------+
+|     Thu truyền thông    |                 |   Mảng anten thu Mr   |
+|  1 anten user, SINR ≥ γc|                 |   Tại mỗi BS, thu echo|
++-----------+-------------+                 +-----------+-----------+
+            |                                           |
+            |                                           v
+            |                               +-----------------------+
+            |                               |      Thu cảm biến     |
+            |                               |   Fusion đa tĩnh, CRLB|
+            |                               +-----------+-----------+
+            |                                           |
+            +---------------------+---------------------+
+                                  |
+                                  v
+                   +------------------------------+
+                   |        Tối ưu hóa mạng       |
+                   |     min CRLB s.t. SINR ≥ γc  |
+                   +------------------------------+
+
+
+================================================================================
+HUONG DAN TRIEN KHAI VA KET NOI UERANSIM VOI FREE5GC (MO HINH 2 MAY AO)
+================================================================================
+
+I. THONG SO MO HINH LAB
+--------------------------------------------------------------------------------
+- May ao 1 (free5GC-Core) : 192.168.56.101 (Host-Only)
+- May ao 2 (UERANSIM)     : 192.168.56.103 (Host-Only)
+- PLMN ID                 : 20893 (MCC: 208, MNC: 93)
+- Slice mac dinh          : SST = 1, SD = 112233
+- Data Network Name (DNN) : internet
+- Thong tin thue bao UE   :
+  + SUPI (IMSI)           : imsi-208930000000001
+  + Key                   : 8baf473f2f8fd09487cccbd7097c6862
+  + OPc                   : 8e27b6af0e692e750f32667a3b14605d
+
+
+================================================================================
+II. CAU HINH TREN MAY 1: free5GC-Core (192.168.56.101)
+================================================================================
+
+1. Cau hinh AMF (Cho phep ket noi N2 tu gNodeB ben ngoai):
+   - Mo file:
+     nano ~/free5gc/config/amfcfg.yaml
+   - Tim muc "ngapIpList" va sua thanh IP card mang Host-Only:
+     ngapIpList:
+       - 192.168.56.101
+   - Luu file (Ctrl + O -> Enter -> Ctrl + X).
+
+2. Cau hinh SMF (Khai bao IP Pool cap phat cho Slice 112233 va DNN internet):
+   - Mo file:
+     nano ~/free5gc/config/smfcfg.yaml
+   - Dam bao phan "snssai_info" co thong tin nhu sau:
+     snssai_info:
+       - sNssai:
+           sst: 1
+           sd: 112233
+         dnn_info:
+           - dnn: internet
+             ue_subnet: 10.60.0.0/16
+   - Luu file (Ctrl + O -> Enter -> Ctrl + X).
+
+3. Khoi chay 5G Core va WebConsole:
+   - Terminal 1 (Chay Core):
+     cd ~/free5gc
+     ./run.sh
+   - Terminal 2 (Chay WebConsole):
+     cd ~/free5gc/webconsole
+     ./bin/webconsole -c config/webuicfg.yaml
+
+4. Dang ky thong tin thue bao (Subscriber) tren trinh duyet:
+   - Truy cap: http://192.168.56.101:5000
+   - Dang nhap: admin / free5gc
+   - Vao muc "SUBSCRIBERS" -> Tao moi (CREATE) hoac sua (VIEW):
+     + SUPI (IMSI)          : 208930000000001
+     + PLMN ID              : 20893
+     + Operator Code Value  : 8e27b6af0e692e750f32667a3b14605d (Type: OPc)
+     + K                    : 8baf473f2f8fd09487cccbd7097c6862
+     + S-NSSAI              : SST = 1, SD = 112233
+     + DNN Configurations   : DNN = internet, Type = IPv4, 5QI = 8 (hoac 9)
+   - Cuon xuong cuoi trang bam "SAVE" hoac "UPDATE".
+
+
+================================================================================
+III. CAU HINH TREN MAY 2: UERANSIM (192.168.56.103)
+================================================================================
+
+1. Cau hinh tram phat song gNodeB:
+   - Mo file:
+     nano ~/UERANSIM/config/free5gc-gnb.yaml
+   - Chinh sua noi dung:
+     mcc: '208'
+     mnc: '93'
+     nci: '0x000000010'
+     idLength: 32
+     tac: 1
+
+     linkIp: 192.168.56.103
+     ngapIp: 192.168.56.103
+     gtpIp: 192.168.56.103
+
+     amfConfigs:
+       - address: 192.168.56.101
+         port: 38412
+
+     slices:
+       - sst: 1
+         sd: 0x112233
+   - Luu file (Ctrl + O -> Enter -> Ctrl + X).
+
+2. Cau hinh thiet bi nguoi dung (UE):
+   - Mo file:
+     nano ~/UERANSIM/config/free5gc-ue.yaml
+   - Chinh sua noi dung (chu y su dung dung tu khoa 'dnn:' thay vi 'apn:'):
+     supi: 'imsi-208930000000001'
+     mcc: '208'
+     mnc: '93'
+     key: '8baf473f2f8fd09487cccbd7097c6862'
+     op: '8e27b6af0e692e750f32667a3b14605d'
+     opType: 'OPC'
+
+     gnbSearchList:
+       - 192.168.56.103
+
+     sessions:
+       - type: 'IPv4'
+         dnn: 'internet'
+         slice:
+           sst: 1
+           sd: 0x112233
+
+     configured-nssai:
+       - sst: 1
+         sd: 0x112233
+
+     default-nssai:
+       - sst: 1
+         sd: 0x112233
+   - Luu file (Ctrl + O -> Enter -> Ctrl + X).
+
+
+================================================================================
+IV. THU TU KHOI CHAY VA KIEM TRA KET NOI
+================================================================================
+
+1. Khoi chay gNodeB (Terminal 1 tren may UERANSIM):
+   cd ~/UERANSIM
+   ./build/nr-gnb -c config/free5gc-gnb.yaml
+   -> Ket qua: Hien thi "[ngap] [info] NG Setup procedure is successful"
+
+2. Khoi chay UE (Terminal 2 tren may UERANSIM):
+   cd ~/UERANSIM
+   sudo ./build/nr-ue -c config/free5gc-ue.yaml
+   -> Ket qua: 
+      + "[nas] [info] UE switches to state [MM-REGISTERED/NORMAL-SERVICE]"
+      + "[nas] [info] PDU Session establishment is successful"
+      + "[ip] [info] Interface uesimtun0 is created"
+
+3. Kiem tra luu luong du lieu (Terminal 3 tren may UERANSIM):
+   - Kiem tra dia chi IP duoc cap:
+     ip a show uesimtun0
+   - Ping kiem tra thong mang ra Internet:
+     ping -I uesimtun0 8.8.8.8

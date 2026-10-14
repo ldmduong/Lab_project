@@ -1,0 +1,33 @@
+Theo tài liệu kỹ thuật 3GPP TS 29.520 (Release 15) trên tài liệu đang mở, NWDAF (Network Data Analytics Function) là chức năng phân tích dữ liệu mạng trong kiến trúc hệ thống 5G (5GS), cung cấp các dịch vụ phân tích dữ liệu liên quan đến mức độ tải và nghẽn của mạng.
+
+1. Vai trò và Chức năng cốt lõi
+Cung cấp dữ liệu phân tích mạng: NWDAF chịu trách nhiệm thu thập, phân tích và cung cấp thông tin mức độ tải (load level information) của từng phiên bản phân chia mạng (Network Slice instance) hoặc tất cả các slice.
+
+Thông báo sự kiện nghẽn mạng: Cung cấp cơ chế cảnh báo khi mức tải vượt ngưỡng quy định hoặc theo chu kỳ định kỳ.
+
+Hỗ trợ tối ưu hóa chính sách và định tuyến: Cung cấp thông tin phân tích cho các Network Function (NF) khác để ra quyết định:
+
+PCF (Policy Control Function): Sử dụng dữ liệu tải từ NWDAF để gán tài nguyên mạng và thực hiện các chính sách định tuyến lưu lượng (traffic steering policies).
+
+NSSF (Network Slice Selection Function): Sử dụng thông tin mức tải để hỗ trợ việc lựa chọn lát cắt mạng (slice selection) tối ưu.
+
+1. PCF + NWDAF (Chống nghẽn & Định tuyến)
+
+Khái niệm: NWDAF báo mức tải lát cắt → PCF áp đặt luật QoS (tăng/giảm băng thông) và traffic steering (chuyển hướng luồng dữ liệu sang Edge/Wi-Fi).
+
+Ý nghĩa: Tự động hóa xử lý nghẽn theo thời gian thực, bảo vệ cam kết chất lượng dịch vụ (SLA) cho các ứng dụng quan trọng.
+
+2. NSSF + NWDAF (Cân bằng tải khi gia nhập)
+
+Khái niệm: NWDAF báo mức tải giữa các phiên bản lát cắt (NSI) → NSSF chọn slice còn trống tài nguyên cho thiết bị mới kết nối.
+
+Ý nghĩa: Cân bằng tải ngay từ khâu tiếp nhận (admission control), tránh dồn thiết bị vào một lát cắt đang quá tải.
+
+
+
+
+
+
+
+
+
